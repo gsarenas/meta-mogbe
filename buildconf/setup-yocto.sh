@@ -16,7 +16,7 @@ fi
 # Source the Yocto environment setup script
 . ./oe-init-build-env ${BUILDDIR}
 
-# Display the available FlexDS targets
+# Display the available MOGBE targets
 echo ""
 echo "MOGBE target is"
 echo "    core-image-mogbe"

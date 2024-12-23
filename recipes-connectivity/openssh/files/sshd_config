@@ -1,0 +1,20 @@
+PermitRootLogin yes
+
+AuthorizedKeysFile /mogbe/keypairs/id_ed25519_mogbe.pub
+
+Port 22
+
+PasswordAuthentication no
+PermitEmptyPasswords yes
+
+ChallengeResponseAuthentication no
+
+X11Forwarding yes
+
+Compression no
+ClientAliveInterval 15
+ClientAliveCountMax 4
+
+Banner /mogbe/ssh_banner_file
+
+Subsystem	sftp	/usr/libexec/sftp-server
