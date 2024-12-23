@@ -19,7 +19,7 @@ fi
 # Display the available FlexDS targets
 echo ""
 echo "MOGBE target is"
-echo "    mogbe"
+echo "    core-image-mogbe"
 
 # If this is the first time, set up configuration files
 if [ $FIRST_TIME -eq 1 ]; then
