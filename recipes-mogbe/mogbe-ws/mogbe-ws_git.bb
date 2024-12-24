@@ -1,6 +1,7 @@
-DESCRIPTION = "Recipe to clone and organize MOGBE repos"
+DESCRIPTION = "Recipe to clone, resolve dependencies, and build MOGBE ROS 2 workspace"
 LICENSE = "CLOSED"
 
+# Clone repositories
 SRC_URI = "git://github.com/gsarenas/mogbe;branch=main;protocol=https;name=mogbe \
     git://github.com/gsarenas/serial;branch=newans_ros2;protocol=https;name=serial \
     git://github.com/gsarenas/diffdrive_arduino;branch=humble-mogbe;protocol=https;name=diffdrive_arduino \
@@ -21,15 +22,42 @@ SRCREV_ldlidar_stl_ros2 = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
 
-do_install() {
-    install -d ${D}/mogbe
-    install -d ${D}/mogbe/mogbe_ws
-    install -d ${D}/mogbe/mogbe_ws/src
+DEPENDS = "python3-colcon-core-native python3-rosdep-native python3-rospkg-native"
 
-    install -d ${S}/mogbe ${D}/mogbe/mogbe_ws/src/mogbe
-    install -d ${S}/serial ${D}/mogbe/mogbe_ws/src/serial
-    install -d ${S}/diffdrive_arduino ${D}/mogbe/mogbe_ws/src/diffdrive_arduino
-    install -d ${S}/ldlidar_stl_ros2 ${D}/mogbe/mogbe_ws/src/ldlidar_stl_ros2
+do_configure() {
+    # Create mogbe_ws directory structure
+    mkdir -p ${S}/mogbe_ws/src
+
+    # Create symbolic links, overwrite if they exist
+    ln -snf ${S}/mogbe ${S}/mogbe_ws/src/mogbe
+    ln -snf ${S}/serial ${S}/mogbe_ws/src/serial
+    ln -snf ${S}/diffdrive_arduino ${S}/mogbe_ws/src/diffdrive_arduino
+    ln -snf ${S}/ldlidar_stl_ros2 ${S}/mogbe_ws/src/ldlidar_stl_ros2
+
+    # Configure rosdep
+    mkdir -p ${S}/etc/ros
+    rosdep init --rosdistro=humble || true
+    rosdep update || true
+    rosdep install --from-paths ${S}/mogbe_ws/src -y --ignore-src || true
 }
 
-FILES:${PN} += "/mogbe/mogbe_ws/src/*"
+do_compile() {
+    # Build the workspace using colcon
+    cd ${S}/mogbe_ws
+    colcon build --symlink-install
+}
+
+do_install() {
+    # Install the built files
+    install -d ${D}/mogbe/mogbe_ws
+    cp -r ${S}/mogbe_ws/* ${D}/mogbe/mogbe_ws/
+
+    # Remove TMPDIR references from setup.sh and local_setup.sh
+    sed -i "s|${TMPDIR}||g" ${D}/mogbe/mogbe_ws/install/setup.sh
+    sed -i "s|${TMPDIR}||g" ${D}/mogbe/mogbe_ws/install/local_setup.sh
+
+    # Remove TMPDIR references from log files
+    sed -i "s|${TMPDIR}||g" ${D}/mogbe/mogbe_ws/log/build_*/logger_all.log
+}
+
+FILES:${PN} += "/mogbe/mogbe_ws/*"
