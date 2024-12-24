@@ -11,6 +11,8 @@ IMAGE_FEATURES:append = " \
     allow-root-login \
     allow-empty-password \
     ssh-server-openssh \
+    tools-debug \
+    tools-sdk \
     "
 
 PACKAGES_DEV_TOOLS = " \
@@ -81,6 +83,12 @@ PACKAGES_DEV_TOOLS = " \
     zlib-dev \
     "
 
+PACKAGES_DOCKER = " \
+    docker \
+    docker-compose \
+    python3-docker \
+    "
+
 PACKAGES_MOGBE = " \
     mogbe-ws \
     "
@@ -109,6 +117,7 @@ PACKAGES_ROS = " \
 
 IMAGE_INSTALL:append = " \
     ${PACKAGES_DEV_TOOLS} \
+    ${PACKAGES_DOCKER} \
     ${PACKAGES_MOGBE} \
     ${PACKAGES_RASPBERRYPI} \
     ${PACKAGES_ROS} \
@@ -117,7 +126,7 @@ IMAGE_INSTALL:append = " \
 # Add 20 GB of extra space [kB]
 IMAGE_ROOTFS_EXTRA_SPACE = "20971520"
 
-IMAGE_FSTYPES:append = " tar tar.gz wic wic.bmap"
-SDIMG_ROOTFS_TYPE = "ext4.xz"
+IMAGE_FSTYPES = "wic"
+SDIMG_ROOTFS_TYPE = "ext4"
 
-# WSK_FILES = "mogbe-sdcard-image.wks.in"
+WKS_FILES = "mogbe-sdcard-image.wks"
