@@ -102,9 +102,9 @@ PACKAGES_RASPBERRYPI = " \
     "
 
 PACKAGES_ROS = " \
+    packagegroup-ros2-demos \
     ros-base \
     ros-core \
-    packagegroup-ros2-demos \
     "
 
 IMAGE_INSTALL:append = " \
