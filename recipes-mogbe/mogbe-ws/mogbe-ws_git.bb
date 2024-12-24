@@ -1,11 +1,14 @@
 DESCRIPTION = "Recipe to clone, resolve dependencies, and build MOGBE ROS 2 workspace"
 LICENSE = "CLOSED"
 
+RDEPENDS:${PN} = "perl"
+
 # Clone repositories
-SRC_URI = "git://github.com/gsarenas/mogbe;branch=main;protocol=https;name=mogbe \
-    git://github.com/gsarenas/serial;branch=newans_ros2;protocol=https;name=serial \
-    git://github.com/gsarenas/diffdrive_arduino;branch=humble-mogbe;protocol=https;name=diffdrive_arduino \
-    git://github.com/gsarenas/ldlidar_stl_ros2;branch=master;protocol=https;name=ldlidar_stl_ros2 \
+SRC_URI = " \
+    git://github.com/gsarenas/mogbe;branch=main;protocol=https;name=mogbe;subdir=mogbe \
+    git://github.com/gsarenas/serial;branch=newans_ros2;protocol=https;name=serial;subdir=serial \
+    git://github.com/gsarenas/diffdrive_arduino;branch=humble-mogbe;protocol=https;name=diffdrive_arduino;subdir=diffdrive_arduino \
+    git://github.com/gsarenas/ldlidar_stl_ros2;branch=master;protocol=https;name=ldlidar_stl_ros2;subdir=ldlidar_stl_ros2 \
     "
 
 SRC_URI[mogbe.sha256sum] = "0fd43a570a9e4326ac05b561b9dbdcf81439e1ce652aa58d27dc27977f654951"
@@ -20,44 +23,11 @@ SRCREV_serial = "${AUTOREV}"
 SRCREV_diffdrive_arduino = "${AUTOREV}"
 SRCREV_ldlidar_stl_ros2 = "${AUTOREV}"
 
-S = "${WORKDIR}/git"
-
-DEPENDS = "python3-colcon-core-native python3-rosdep-native python3-rospkg-native"
-
-do_configure() {
-    # Create mogbe_ws directory structure
-    mkdir -p ${S}/mogbe_ws/src
-
-    # Create symbolic links, overwrite if they exist
-    ln -snf ${S}/mogbe ${S}/mogbe_ws/src/mogbe
-    ln -snf ${S}/serial ${S}/mogbe_ws/src/serial
-    ln -snf ${S}/diffdrive_arduino ${S}/mogbe_ws/src/diffdrive_arduino
-    ln -snf ${S}/ldlidar_stl_ros2 ${S}/mogbe_ws/src/ldlidar_stl_ros2
-
-    # Configure rosdep
-    mkdir -p ${S}/etc/ros
-    rosdep init --rosdistro=humble || true
-    rosdep update || true
-    rosdep install --from-paths ${S}/mogbe_ws/src -y --ignore-src || true
-}
-
-do_compile() {
-    # Build the workspace using colcon
-    cd ${S}/mogbe_ws
-    colcon build --symlink-install
-}
+S = "${WORKDIR}"
 
 do_install() {
-    # Install the built files
-    install -d ${D}/mogbe/mogbe_ws
-    cp -r ${S}/mogbe_ws/* ${D}/mogbe/mogbe_ws/
-
-    # Remove TMPDIR references from setup.sh and local_setup.sh
-    sed -i "s|${TMPDIR}||g" ${D}/mogbe/mogbe_ws/install/setup.sh
-    sed -i "s|${TMPDIR}||g" ${D}/mogbe/mogbe_ws/install/local_setup.sh
-
-    # Remove TMPDIR references from log files
-    sed -i "s|${TMPDIR}||g" ${D}/mogbe/mogbe_ws/log/build_*/logger_all.log
+    install -d -m 0755 ${D}/mogbe/mogbe_ws/src/mogbe
+    cp -R --no-dereference --preserve=mode,links -v ${S}/mogbe ${S}/serial ${S}/diffdrive_arduino ${S}/ldlidar_stl_ros2 ${D}/mogbe/mogbe_ws/src
 }
 
-FILES:${PN} += "/mogbe/mogbe_ws/*"
+FILES:${PN} += "/mogbe/mogbe_ws/src/*"
