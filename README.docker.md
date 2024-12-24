@@ -39,7 +39,9 @@ cd /workspace
 ```
 
 > Solução temporária para o problema do `gazebo` não estar disponível:
+> 
 > `sed -i '/<depend>gazebo_ros_pkgs<\/depend>/d;/<depend>gazebo_ros2_control<\/depend>/d' src/mogbe/package.xml`
+> 
 > `sed -i '/<depend>gazebo_ros_pkgs<\/depend>/d' src/mogbe/package.xml`
 
 Instalar dependências:
