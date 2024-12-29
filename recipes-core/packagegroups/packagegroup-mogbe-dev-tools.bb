@@ -1,0 +1,80 @@
+DESCRIPTION = "MOGBE's custom package groups for dev tools"
+
+inherit packagegroup
+
+PACKAGES = "${PN}"
+
+RDEPENDS:${PN} = " \
+    bash \
+    boost-dev \
+    ceres \
+    coreutils \
+    cmake \
+    curl \
+    dbow2 \
+    dbow3 \
+    diffutils \
+    g++ \
+    gawk \
+    gcc \
+    gdb \
+    git \
+    grep \
+    htop \
+    iperf3 \
+    iputils \
+    libeigen \
+    libstdc++-dev \
+    lsof \
+    make \
+    man \
+    nano \
+    net-tools \
+    nmap \
+    parted \
+    pkgconfig \
+    python3 \
+    python3-colcon-bash \
+    python3-colcon-cd \
+    python3-colcon-cmake \
+    python3-colcon-common-extensions \
+    python3-colcon-core \
+    python3-colcon-defaults \
+    python3-colcon-devtools \
+    python3-colcon-library-path \
+    python3-colcon-metadata \
+    python3-colcon-notification \
+    python3-colcon-output \
+    python3-colcon-package-information \
+    python3-colcon-package-selection \
+    python3-colcon-parallel-executor \
+    python3-colcon-pkg-config \
+    python3-colcon-python-setup-py \
+    python3-colcon-recursive-crawl \
+    python3-colcon-ros \
+    python3-colcon-test-result \
+    python3-dev \
+    python3-empy \
+    python3-pip \
+    python3-pyserial \
+    python3-rosdep \
+    python3-rosdistro \
+    python3-rospkg \
+    python3-vcstool \
+    opencv \
+    opencv-dev \
+    openssh-sftp-server \
+    openssl-dev \
+    rsync \
+    sed \
+    strace \
+    tar \
+    tcpdump \
+    tree \
+    tzdata \
+    unzip \
+    urdf \
+    vim \
+    wget \
+    zlib-dev \
+    "
