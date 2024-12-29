@@ -3,12 +3,12 @@ SUMMARY = "Ceres Solver is an open source C++ library for modeling and solving l
 
 HOMEPAGE = "http://ceres-solver.org/"
 
-LICENSE = "BSD"
+LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bb761279816b72be19d7ce646e4e2a14"
 
 DEPENDS = "libeigen"
 
-SRC_URI = "https://github.com/ceres-solver/ceres-solver/archive/refs/tags/${PV}.tar.gz "
+SRC_URI = "https://github.com/ceres-solver/ceres-solver/archive/refs/tags/${PV}.tar.gz"
 SRC_URI[sha256sum] = "ccbd716a93f65d4cb017e3090ae78809e02f5426dce16d0ee2b4f8a4ba2411a8"
 
 S = "${WORKDIR}/ceres-solver-${PV}"

@@ -3,7 +3,7 @@ SUMMARY = "DBoW2 is an improved version of the DBow library, an open source C++ 
 
 HOMEPAGE = "http://doriangalvez.com"
 
-LICENSE = "BSD"
+LICENSE = "BSD-4-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a40f1140f1638a6a38ba967cd7c95f83"
 
 DEPENDS = "opencv boost dlib"

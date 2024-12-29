@@ -3,7 +3,7 @@ SUMMARY = "DLib is a collection of C++ classes to solve common tasks in C++ prog
 
 HOMEPAGE = "http://doriangalvez.com"
 
-LICENSE = "BSD"
+LICENSE = "BSD-4-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d5dfda376b8fb70bfe59053408e8b0e8"
 
 DEPENDS = "opencv"
