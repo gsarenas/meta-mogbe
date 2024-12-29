@@ -28,6 +28,7 @@ IMAGE_INSTALL:append = " \
     packagegroup-mogbe-docker \
     packagegroup-mogbe-raspberrypi \
     packagegroup-mogbe-ros \
+    packagegroup-mogbe-ros-sdk-humble \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'weston-xwayland xterm', '', d)} \
     "
 

@@ -1,0 +1,1 @@
+LICENSE = "GPL-1.0"

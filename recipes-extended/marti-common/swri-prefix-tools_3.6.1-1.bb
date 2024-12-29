@@ -10,7 +10,7 @@ AUTHOR = "Southwest Research Institute <swri-robotics@swri.org>"
 ROS_AUTHOR = "Elliot Johnson"
 HOMEPAGE = "https://github.com/swri-robotics/marti_common"
 SECTION = "devel"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://package.xml;beginline=14;endline=14;md5=d566ef916e9dedc494f5f793a6690ba5"
 
 ROS_CN = "marti_common"
@@ -27,6 +27,7 @@ ROS_EXPORT_DEPENDS = ""
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
 
 ROS_EXEC_DEPENDS = " \
+    bash \
     python3-psutil \
 "
 

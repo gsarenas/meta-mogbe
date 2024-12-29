@@ -1,0 +1,1 @@
+LICENSE = "CC-BY-1.0"
