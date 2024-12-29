@@ -1,6 +1,6 @@
 # Build com docker
 
-Devido à complexidade de configurar uma SDK dedicada para compilar os pacotes para o target, foi decidido utilizar um container `docker` para compilar os pacotes do MOGBE no dispositivo. A estratégia então é compilar a imagem com Docker e utilizar os resultados de compilação.
+Aqui estão os passos de como utilizar um container `docker` para compilar os pacotes do MOGBE no dispositivo. Nesse caso, tanto a compilação quanto a execução devem ser feitos no ambiente Docker.
 
 # Passos para build
 
@@ -58,4 +58,24 @@ Compilar projetos:
 
 ```bash
 colcon build --symlink-install
+```
+
+# Execução
+
+Dentro do ambiente Docker, basta configurar as variáveis de ambiente:
+
+```bash
+cd /workspace && source install/setup.bash
+```
+
+Executar o robô:
+
+```bash
+ros2 launch mogbe mogbe_robot_pi_all.launch.py
+```
+
+ou
+
+```bash
+ros2 launch mogbe mogbe_robot_pi.launch.py
 ```
