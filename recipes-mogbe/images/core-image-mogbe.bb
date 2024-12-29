@@ -18,7 +18,10 @@ IMAGE_FEATURES:append = " \
                                                        '', d), d)} \
     "
 
-IMAGE_FEATURES:remove = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'x11-base', '', d)}"
+IMAGE_FEATURES:remove = " \
+    package-management \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'x11-base', '', d)} \
+    "
 
 IMAGE_INSTALL:append = " \
     packagegroup-mogbe-dev-tools \
