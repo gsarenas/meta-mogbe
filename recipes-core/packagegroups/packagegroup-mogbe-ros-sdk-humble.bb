@@ -53,14 +53,7 @@ RDEPENDS:${PN} = " \
     rclcpp-dev \
     std-msgs-dev \
     ecl-tools \
-    compressed-depth-image-transport \
     compressed-image-transport \
-    moveit-ros-planning \
-    moveit-servo \
-    moveit-ros-planning-interface \
-    moveit-common \
-    moveit-ros-robot-interaction \
-    octomap \
     rclcpp \
     rclc \
     rcl-yaml-param-parser \
@@ -84,24 +77,16 @@ RDEPENDS:${PN} = " \
     marti-visualization-msgs \
     libmavconn \
     laser-filters \
-    cartographer-ros \
     fastrtps \
     mavros \
     mavros-msgs \
-    octomap-server \
-    octomap-mapping \
     odom-to-tf-ros2 \
     pendulum-control \
-    raspimouse-msgs \
-    rcdiscover \
     rc-genicam-api \
     rc-reason-msgs \
-    ros2-control \
-    ros2-controllers \
     ros2launch-security-examples \
     rosapi \
     rosapi-msgs \
-    rosbridge-library \
     rosbridge-server \
     sros2 \
     v4l2-camera \
